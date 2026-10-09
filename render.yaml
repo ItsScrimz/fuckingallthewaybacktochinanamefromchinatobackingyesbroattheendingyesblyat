@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: discord-bot
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python bot.py
+    plan: free
+
+    # Render automatically sets PORT and RENDER_EXTERNAL_URL.
+    # You must fill in the four secrets below in the Render dashboard
+    # (Environment tab) — do NOT paste real values here, this file is
+    # committed to GitHub.
+    envVars:
+      - key: DISCORD_TOKEN
+        sync: false          # fill in Render dashboard
+
+      - key: DISCORD_CLIENT_ID
+        sync: false
+
+      - key: DISCORD_CLIENT_SECRET
+        sync: false
+
+      # Must match EXACTLY what you add in Discord Developer Portal → OAuth2 → Redirects
+      # Format:  https://<your-service-name>.onrender.com/auth
+      - key: REDIRECT_URI
+        sync: false
+
+      # Optional — defaults to ","
+      - key: PREFIX
+        value: ","
